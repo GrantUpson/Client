@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Client
 {
-    private String hostname;
-    private int port;
+    private final String hostname;
+    private final int port;
 
     public Client(String hostname, int port)
     {
@@ -24,26 +24,39 @@ public class Client
             Scanner clientReader = new Scanner(System.in);
             String command = "";
 
-            while(!command.equalsIgnoreCase("exit"))
+            while(true)
             {
-                String[] serverMessage = reader.readLine().split("/");
-
-                for(String message : serverMessage)
-                {
-                    System.out.println(message);
-                }
-
+                retrieveMessage(reader);
                 command = clientReader.nextLine();
                 writer.write(command + "\r\n");
                 writer.flush();
+                retrieveMessage(reader);
             }
-
-            reader.close();
-            writer.close();
         }
         catch(IOException ioException)
         {
             System.out.println("Error: " + ioException.getLocalizedMessage());
+        }
+        catch(NullPointerException npException)
+        {
+            System.out.println("Closing connection..");
+        }
+    }
+
+    public void retrieveMessage(BufferedReader reader)
+    {
+        try
+        {
+            String[] serverMessage = reader.readLine().split("/");
+
+            for(String message : serverMessage)
+            {
+                System.out.println(message);
+            }
+        }
+        catch(IOException ioException)
+        {
+            System.out.println("Error: " + ioException.getMessage());
         }
     }
 
