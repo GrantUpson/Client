@@ -22,7 +22,7 @@ public class Client
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             BufferedWriter writer =  new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             Scanner clientReader = new Scanner(System.in);
-            String command = "";
+            String command;
 
             while(true)
             {
