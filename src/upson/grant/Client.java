@@ -4,6 +4,11 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/*
+  @author Grant Upson : 385831
+  @author Adib Shadman : 468684
+*/
+
 public class Client
 {
     private final String hostname;
@@ -35,7 +40,7 @@ public class Client
         }
         catch(IOException ioException)
         {
-            System.out.println("Error: " + ioException.getLocalizedMessage());
+            System.out.println("Error: " + ioException.getMessage());
         }
         catch(NullPointerException npException)
         {
